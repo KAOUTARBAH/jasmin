@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Gestion Magsinier et Admin et Web Service</title>
+</head>
+
+
+	<body>
+
+	<ui:composition template="/resources/template/layout.xhtml">
+		<ui:define name="content">
+			<f:view>
+				<h:form>
+					<h3>
+						Ajouter Magasinier  <a
+							href="https://www.doranco.fr/candidature/parcours/41?">Ecole
+							DORANCO</a>
+					</h3>
+
+
+					<h:panelGroup id="panelUser">
+
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="2">
+							
+						</h:panelGrid>
+
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
+
+							<h:outputLabel value="Nom : "></h:outputLabel>
+							<h:inputText id="name" value="#{userbean.name}" required="true"
+								requiredMessage="Le Nom est obligatoire !">
+								<f:validateLength minimum="2" maximum="20" />
+								<f:validateRegex pattern="^[a-zA-Z-\s]*"></f:validateRegex>
+							</h:inputText>
+							<h:message for="name" style="color:red"></h:message>
+
+							<h:outputLabel value="Prénom : "></h:outputLabel>
+							<h:inputText id="firstName" value="#{userbean.firstName}"
+								required="true" requiredMessage="Le Prénom est obligatoire !">
+								<f:validateLength minimum="2" maximum="20" />
+								<f:validateRegex pattern="^[a-zA-Z-\s]*"></f:validateRegex>
+							</h:inputText>
+							<h:message for="firstName" style="color:red"></h:message>
+
+							<h:outputLabel value="Email : "></h:outputLabel>
+							<h:inputText id="email" value="#{userbean.email}" required="true"
+								requiredMessage="L'email est obligatoire !">
+								<f:validateLength minimum="8" maximum="30" />
+							</h:inputText>
+							<h:message for="email" style="color:red"></h:message>
+
+							<h:outputLabel value="Mot de passe : "></h:outputLabel>
+							<h:inputSecret id="motDePasse" value="#{userbean.password}"
+								required="true"
+								requiredMessage="Le mot de passe est obligatoire !">
+								<f:validateLength minimum="8" maximum="30" />
+								<!-- 					<f:validateRegex pattern="^[a-z]{1,}[A-Z]{1,}[0-9]{1,}[@%!-+?]{1,}*"></f:validateRegex> -->
+							</h:inputSecret>
+							<h:message for="motDePasse" style="color:red"></h:message>
+
+							<h:outputLabel value="Confirmation Mot de passe : "></h:outputLabel>
+							<h:inputSecret id="passwordConfirmation"
+								value="#{userbean.passwordConfirmation}" required="true"
+								requiredMessage="Le mot de passe de confirmation est obligatoire !">
+								<f:validateLength minimum="8" maximum="30" />
+								<!-- 					<f:validateRegex pattern="^[a-z]{1,}[A-Z]{1,}[0-9]{1,}[@%!-+?]{1,}*"></f:validateRegex> -->
+							</h:inputSecret>
+							<h:message for="passwordConfirmation" style="color:red"></h:message>
+
+							<h:outputLabel value="Date de naissance : "></h:outputLabel>
+							<h:inputText id="birhDate" value="#{userbean.birhDate}"
+								required="true"
+								requiredMessage="La date de naissance est obligatoire">
+								<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+					(jj/mm/aaaa)
+				</h:inputText>
+							<h:message for="birhDate" style="color:red"></h:message>
+
+							<h:outputLabel value="Profile : "></h:outputLabel>
+							<h:selectOneListbox id="profile"
+								value="#{userbean.profile}" required="true"
+								requiredMessage="Le niveau de service est obligatoire !">
+								<f:selectItem itemLabel="Admin" itemValue="Admin" />
+								<f:selectItem itemLabel="Magasinier" itemValue="Magasinier" />
+								<f:selectItem itemLabel="Client" itemValue="Client" />
+							</h:selectOneListbox>
+							<h:message for="profile" style="color:red"></h:message>
+							
+							<h:outputLabel value="Telephone :" />
+						<h:inputText id="phone" required="true"
+							value="#{userbean.phone}"
+							requiredMessage="Le telephone est obligatoire !">
+							<f:validateLength minimum="3" maximum="30"></f:validateLength>
+						</h:inputText>
+						<h:message for="phone" style="color:red"></h:message>
+
+
+						<h:outputLabel value="Actif :" />
+						<h:selectOneRadio id="isActif" required="true"
+							value="#{userbean.isActif}"
+							requiredMessage="Le choix de disponible est obligatoire !">
+							<f:selectItem itemLabel="true" itemValue="true" />
+							<f:selectItem itemLabel="false" itemValue="false" />
+						</h:selectOneRadio>
+						<h:message for="isActif" style="color:red"></h:message>
+
+							
+						</h:panelGrid>
+
+					</h:panelGroup>
+
+					<h:panelGroup id="panelButtons">
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
+							<h:commandButton id="addUserBean" value="Ajouter utilisateur"
+								action="#{userbean.addUserBean()}">
+							</h:commandButton>
+							<h:button id="alert" value="Alerte" onclick="alert('Bonjour !')">
+							</h:button>
+
+						</h:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup id="panelMessagess">
+						<h:panelGrid columns="1" cellpadding="0" cellspacing="0">
+							<h:outputText value="#{userbean.messageSuccess}"
+								style="color:green"></h:outputText>
+							<h:outputText value="#{userbean.messageError}" style="color:red"></h:outputText>
+						</h:panelGrid>
+					</h:panelGroup>
+
+				</h:form>
+
+				<h:form>
+					<p>
+						<h4>Adresse(s) :</h4>
+					</p>
+					<h:panelGroup>
+
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
+							<h:outputLabel value="Numéro : "></h:outputLabel>
+							<h:inputText id="number" value="#{adressbean.number}"
+								required="true" requiredMessage="Le numéro est obligatoire !">
+							</h:inputText>
+							<h:message for="number" style="color:red"></h:message>
+
+							<h:outputLabel value="Rue : "></h:outputLabel>
+							<h:inputText id="street" value="#{adressbean.street}" required="true"
+								requiredMessage="La rue est obligatoire !">
+							</h:inputText>
+							<h:message for="street" style="color:red"></h:message>
+
+							<h:outputLabel value="Ville : "></h:outputLabel>
+							<h:inputText id="city" value="#{adressbean.city}"
+								required="true" requiredMessage="L aville est obligatoire !">
+							</h:inputText>
+							<h:message for="city" style="color:red"></h:message>
+
+							<h:outputLabel value="Code postal : "></h:outputLabel>
+							<h:inputText id="postalCode" value="#{adressbean.postalCode}"
+								required="true"
+								requiredMessage="Le code postal est obligatoire !">
+							</h:inputText>
+							<h:message for="postalCode" style="color:red"></h:message>
+						</h:panelGrid>
+
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
+							<h:commandButton id="addAdress" value="Ajouter l'adresse"
+								action="#{adressbean.addAdressBean()}">
+							</h:commandButton>
+						</h:panelGrid>
+
+					</h:panelGroup>
+
+				</h:form>
+ 
+				<h:form>
+					<h:panelGrid columns="1" cellpadding="0" cellspacing="0">
+						<ui:repeat value="#{adressbean.adresses}" var="a">
+							<h:outputText style="color:blue"
+								value="#{a.number} #{a.street} #{a.postalCode} #{a.city}" />
+							<br></br>
+						</ui:repeat>
+					</h:panelGrid>
+				</h:form> 
+
+				
+				<h:form>
+					<h4>Liste des participants inscrites</h4>
+
+					<h:dataTable value="#{userbean.users}" var="o"
+						styleClass="order-table" headerClass="order-table-header"
+						newClasses="order-table-odd-row,order-table-even-row
+							,order-table-column">
+
+						<h:column>
+							<!-- column header -->
+							<f:facet name="header">Genre</f:facet>
+							<!-- row record -->
+							<h:outputText value="#{o.genre}" />
+						</h:column>
+
+						<h:column>
+							<!-- column header -->
+							<f:facet name="header">Prénom</f:facet>
+							<!-- row record -->
+							<h:outputText value="#{o.firstName}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Nom</f:facet>
+							<h:outputText value="#{o.name}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Email</f:facet>
+							<h:outputText value="#{o.email}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Mot de passe</f:facet>
+							<h:outputText value="#{o.password}" />
+						</h:column>
+
+
+						<h:column>
+							<f:facet name="header">Date de Naissance</f:facet>
+							<h:outputText value="#{o.birhDate}">
+								<f:convertDateTime pattern="E, dd MMMM yyyy"></f:convertDateTime>
+							</h:outputText>
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Niveau de Service</f:facet>
+							<h:outputText value="#{o.isActif}" />
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Niveau de Service</f:facet>
+							<h:outputText value="#{o.profile}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Adresse(s)</f:facet>
+							
+							<ui:repeat var="a" value="#{o.adresses}">
+								<h:outputText
+									value="#{a.number} #{a.street} #{a.city} #{a.postalCode}" />
+								<br></br>
+							</ui:repeat>
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Telephone</f:facet>
+							<h:outputText value="#{o.phone}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Profile</f:facet>
+							<h:outputText value="#{o.profile}" />
+						</h:column>
+
+						
+
+				
+						<h:column>
+							<f:facet name="header">Action</f:facet>
+							<h:commandLink value="Supprimer"
+								action="#{userbean.deleteAction(o)}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Action</f:facet>
+							<h:commandButton value="Supprimer"
+								action="#{userbean.deleteAction(o)}" />
+						</h:column>
+
+					</h:dataTable>
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+
+	
+	
+	
+	
+
+
+
+</body>
+</html>
